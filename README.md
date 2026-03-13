@@ -2,6 +2,12 @@
 ### Ops Intelligence for Fintech — Automated PnL Monitoring & AI-Powered Risk Flagging
 [![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/onurmertsozer/middlelayer/blob/main/middlelayer.ipynb)
 
+### 📈 Project Roadmap (In Progress)
+- [x] Phase 1: Core PnL Engine & CSV Ingestion
+- [x] Phase 2: Slack Notification Integration
+- [x] Phase 3: External Configuration (YAML)
+- [ ] Phase 4: Interactive Data Viz (Chart.js)
+- [ ] Phase 5: Database Persistence (PostgreSQL)
 ---
 
 ## The Problem
