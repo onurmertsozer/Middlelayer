@@ -1,0 +1,14 @@
+# OS generated files
+.DS_Store
+Thumbs.db
+
+# Python cache files
+__pycache__/
+*.pyc
+
+# Environment variables (Never commit API keys)
+.env
+
+# Generated output files
+report.html
+report.json
