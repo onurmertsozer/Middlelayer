@@ -216,27 +216,33 @@ def send_slack_alert(webhook_url: str, summary: dict, flagged: list[dict]):
 
 # ── HTML Dashboard ────────────────────────────────────────────────────────────
 
-def generate_html_report(trades: list[dict], flagged: list[dict], summary: dict, ai_analysis: str) -> str:
-    pnl_color = "#166534" if summary["total_pnl_eur"] >= 0 else "#991B1B"
-    desk_rows = "".join(f'<tr><td>{desk}</td><td style="color:{"#166534" if pnl>=0 else "#991B1B"}">€{pnl:,.2f}</td></tr>' for desk, pnl in summary["by_desk"].items())
-    flagged_rows = "".join(f'<tr style="background:{"#FEE2E2" if t["flag_count"]>=2 else "#FEF3C7"}"><td><strong>{t["id"]}</strong></td><td>{t["instrument"]}</td><td>{t["type"]}</td><td>€{t["pnl_eur"]:,.2f}</td><td>{"HIGH" if t["flag_count"]>=2 else "MEDIUM"}</td><td>{" · ".join(t["flags"])}</td></tr>' for t in flagged[:15])
+def send_slack_alert(webhook_url: str, summary: dict, flagged: list[dict]):
+    if not webhook_url: return
+    color = "#991B1B" if summary["flagged_count"] > 0 else "#166534"
+    
+    # Text kısmını ayrı bir değişken yapıp üç tırnakla tanımlıyoruz
+    message_text = f"""📊 *MiddleLayer Ops Briefing*
+*PnL:* €{summary['total_pnl_eur']:,}
+*Anomalies:* {summary['flagged_count']} flagged for review."""
 
-    return f"""<html><body style="font-family:sans-serif;background:#F8FAFC;padding:20px;">
-    <h1 style="color:#1B3A6B">MiddleLayer Dashboard</h1>
-    <p>Generated: {summary['generated_at']}</p>
-    <div style="display:flex;gap:10px;margin-bottom:20px;">
-        <div style="background:white;padding:20px;border:1px solid #DDD;"><h3>€{summary['total_pnl_eur']:,.0f}</h3>Total PnL</div>
-        <div style="background:white;padding:20px;border:1px solid #DDD;"><h3>{summary['flagged_count']}</h3>Flagged</div>
-    </div>
-    <div style="background:#EFF6FF;padding:15px;border-left:5px solid #3B82F6;margin-bottom:20px;">
-        <h2>AI Operations Briefing</h2>{ai_analysis.replace(chr(10), '<br>')}
-    </div>
-    <h2>Flagged Trades</h2>
-    <table border="1" style="width:100%;border-collapse:collapse;">
-        <tr style="background:#EEE"><th>ID</th><th>Instrument</th><th>Type</th><th>PnL</th><th>Severity</th><th>Flags</th></tr>
-        {flagged_rows}
-    </table>
-    </body></html>"""
+    payload = {
+        "attachments": [{
+            "color": color, 
+            "title": "Daily Briefing", 
+            "text": message_text
+        }]
+    }
+    
+    req = urllib.request.Request(
+        webhook_url, 
+        data=json.dumps(payload).encode("utf-8"), 
+        headers={"Content-Type": "application/json"}
+    )
+    try: 
+        urllib.request.urlopen(req)
+        print("  ✅ Slack alert sent!")
+    except Exception as e: 
+        print(f"  ⚠️ Slack failed: {e}")
 
 # ── Main ──────────────────────────────────────────────────────────────────────
 
