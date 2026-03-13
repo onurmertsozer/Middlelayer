@@ -132,12 +132,15 @@ MiddleLayer/
 
 ## Roadmap
 
-- [ ] Slack / email delivery for daily reports
-- [ ] Configurable anomaly thresholds via `config.yaml`
+### Features
+- **Configurable Rules:** All anomaly thresholds are managed via `config.yaml`.
+- **Slack Alerts:** Real-time notifications for critical trade flags.
+- **AI Briefing:** Automated insights powered by Claude 3.5 Sonnet.
+
+### Roadmap
+- [x] Slack / email delivery for daily reports
+- [x] Configurable anomaly thresholds via `config.yaml`
 - [ ] Multi-day trend analysis
-- [ ] Counterparty risk scoring
-- [ ] REST API endpoint for real-time feed integration
-- [ ] PostgreSQL backend for trade history
 
 ---
 
