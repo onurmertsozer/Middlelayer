@@ -130,7 +130,6 @@ MiddleLayer/
 
 ---
 
-## Roadmap
 
 ### Features
 - **Configurable Rules:** All anomaly thresholds are managed via `config.yaml`.
