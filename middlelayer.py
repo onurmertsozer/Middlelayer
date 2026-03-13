@@ -207,7 +207,7 @@ def send_slack_alert(webhook_url: str, summary: dict, flagged: list[dict]):
 
 # ── HTML Dashboard ────────────────────────────────────────────────────────────
 
-def generate_html(trades, flagged, summary, ai_text):
+def generate_html_report(trades, flagged, summary, ai_text):
 
     return f"""
     <html>
