@@ -1,0 +1,14 @@
+# MiddleLayer Configuration Settings
+analysis_rules:
+  large_loss_threshold: -5000
+  large_gain_threshold: 8000
+  price_deviation_pct: 5.0
+  trading_hours:
+    start: 6
+    end: 22
+
+notifications:
+  slack_enabled: true
+  severity_colors:
+    high: "#991B1B"
+    medium: "#FEF3C7"
