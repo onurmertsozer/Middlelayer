@@ -134,6 +134,9 @@ MiddleLayer/
 ### Features
 - **Configurable Rules:** All anomaly thresholds are managed via `config.yaml`.
 - **Slack Alerts:** Real-time notifications for critical trade flags.
+- ## 🔔 Real-time Monitoring.
+- <img width="350" height="108" alt="Screenshot 2026-03-13 at 16 58 44" src="https://github.com/user-attachments/assets/204b545f-6b1c-4707-b203-b7563c2e5a38" />
+
 - **AI Briefing:** Automated insights powered by Claude 3.5 Sonnet.
 
 ### Roadmap
